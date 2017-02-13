@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * Basic database connector
+ *
+ * HelperDbConnector
+ *
+ * @author   Peter Schweizer <peter.schweizer@soprado.de>
+ */
 class HelperDbConnector
 {
     private $pdo = null;
@@ -19,6 +26,14 @@ class HelperDbConnector
         $this->pdo = new PDO($dbConn, $this->dbUser, $this->dbPasswd);
     }
 
+    /**
+     * prepares sql statement
+     *
+     * @param  string $tariffList
+     * @param  array  $driverOptions
+     *
+     * @return PDOStatement
+     */
     public function prepare($statement, $driverOptions = array())
     {
         return $this->pdo->prepare($statement, $driverOptions);
