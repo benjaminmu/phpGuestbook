@@ -5,7 +5,7 @@
  *
  * HelperDbConnector
  *
- * @author   Peter Schweizer <peter.schweizer@soprado.de>
+ * @author Benjamin Munsch <benjamin.munsch@googlemail.com>
  */
 class HelperDbConnector
 {
