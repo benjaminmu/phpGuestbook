@@ -1,9 +1,19 @@
 <?php
 
+/**
+ * ModelGuestbook
+ *
+ * @author Benjamin Munsch <benjamin.munsch@googlemail.com>
+ */
 class ModelGuestbook extends ModelDbEntity
 {
     private $dbTable = 'entries';
 
+    /**
+     * retrieves all guestbook entries
+     *
+     * @return  array
+     */
     public function getEntries()
     {
         $result = [];
