@@ -25,6 +25,14 @@ class ModelUser
     }
 
     /**
+     * @return  string $name
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
      * populates $this with user data
      *
      * @param   int $id
