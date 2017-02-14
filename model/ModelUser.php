@@ -90,6 +90,7 @@ class ModelUser
             $this->id = $row['id'];
             $this->name = $row['name'];
             $this->passwordHash = $row['password_hash'];
+            $this->admin = $row['admin'];
         }
 
         return $this;
@@ -114,6 +115,7 @@ class ModelUser
             $this->id = $row['id'];
             $this->name = $row['name'];
             $this->passwordHash = $row['password_hash'];
+            $this->admin = $row['admin'];
         }
 
         return $this;
