@@ -7,10 +7,12 @@
  */
 class ModelGuestbookEntry
 {
-    public $id = null;
-    public $headline = '';
-    public $text = '';
-    public $author = null;
+    private $id = null;
+    private $headline = '';
+    private $text = '';
+    private $author = null;
+    private $validationError = '';
+
 
     /**
      * @param   int $aId
@@ -85,6 +87,14 @@ class ModelGuestbookEntry
     }
 
     /**
+     * @return  string $validationError
+     */
+    public function getValidationError()
+    {
+        return $this->validationError;
+    }
+
+    /**
      * @param   string $dbTable
      */
     public function save($dbTable)
@@ -96,5 +106,23 @@ class ModelGuestbookEntry
             'text' => $this->text,
             'author' => $this->author,
         ]);
+    }
+
+    /**
+     * @return   array $validationResult
+     */
+    public function validate()
+    {
+        if ($this->text == '') {
+            $this->validationError = 'Bitte geben sie einen Text in das Eingabefeld ein.';
+            return false;
+        }
+
+        if (is_null($this->author)) {
+            $this->validationError = 'Sie müssen angemeldet sein, um einen Eintrag verfassen zu können.';
+            return false;
+        }
+
+        return true;
     }
 }
