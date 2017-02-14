@@ -3,11 +3,11 @@
 /**
  * Basic database connector
  *
- * HelperDbConnector
+ * DbConnector
  *
  * @author Benjamin Munsch <benjamin.munsch@googlemail.com>
  */
-class HelperDbConnector
+class DbConnector
 {
     private $pdo = null;
 
@@ -24,7 +24,7 @@ class HelperDbConnector
      *
      * @return PDOStatement
      */
-    public static function prepare($statement, $driverOptions = [])
+    public function prepare($statement, $driverOptions = [])
     {
         $dbConn = 'mysql:host=' . self::DB_HOST . ';dbname=' . self::DB_NAME . ';charset=utf8';
         $pdo = new PDO($dbConn, self::DB_USER, self::DB_PASSWD);
