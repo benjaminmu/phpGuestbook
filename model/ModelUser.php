@@ -7,13 +7,36 @@
  */
 class ModelUser
 {
-    protected $dbConnector;
-    protected $id;
-    protected $name;
-    protected $passwordHash;
+    private $dbConnector;
+    private $id;
+    private $name;
+    private $password;
+    private $passwordHash;
+    private $admin;
+    private $validationError;
 
     public function __construct(DbConnector $dbConnector) {
         $this->dbConnector = $dbConnector;
+    }
+
+    /**
+     * @param   int $aName
+     * @return  ModelUser
+     */
+    public function setName($aName)
+    {
+        $this->name = (string)$aName;
+        return $this;
+    }
+
+    /**
+     * @param   int $aPassword
+     * @return  ModelUser
+     */
+    public function setPassword($aPassword)
+    {
+        $this->password = (string)$aPassword;
+        return $this;
     }
 
     /**
@@ -33,6 +56,22 @@ class ModelUser
     }
 
     /**
+     * @return  bool
+     */
+    public function isAdmin()
+    {
+        return (bool)$this->admin;
+    }
+
+    /**
+     * @return  string $validationError
+     */
+    public function getValidationError()
+    {
+        return $this->validationError;
+    }
+
+    /**
      * populates $this with user data
      *
      * @param   int $id
@@ -40,7 +79,9 @@ class ModelUser
      */
     public function loadById($id)
     {
-        $statement = $this->dbConnector->prepare('SELECT * FROM users WHERE id = :id');
+        $statement = $this->dbConnector->prepare(
+            'SELECT id, name, password_hash, admin FROM users WHERE id = :id'
+        );
         $statement->execute([
             'id' => (int)$id,
         ]);
@@ -62,7 +103,9 @@ class ModelUser
      */
     public function loadByName($name)
     {
-        $statement = $this->dbConnector->prepare('SELECT * FROM users WHERE name = :name');
+        $statement = $this->dbConnector->prepare(
+            'SELECT id, name, password_hash, admin FROM users WHERE name = :name'
+        );
         $statement->execute([
             'name' => $name,
         ]);
@@ -77,17 +120,16 @@ class ModelUser
     }
 
     /**
-     * @param   string $name
-     * @param   string $password
      * @return  void
      */
-    public function register($name, $password)
+    public function register()
     {
-        $passwordHash = password_hash($password, PASSWORD_BCRYPT);
+        $passwordHash = password_hash($this->password, PASSWORD_BCRYPT);
+        $this->setPassword(null);
 
         $statement = $this->dbConnector->prepare('INSERT INTO users (name, password_hash) VALUES (:name, :password_hash)');
         $statement->execute([
-            'name' => $name,
+            'name' => $this->name,
             'password_hash' => $passwordHash,
         ]);
     }
@@ -105,5 +147,47 @@ class ModelUser
         }
 
         return password_verify($password, $this->passwordHash);
+    }
+
+    /**
+     * @return   array $validationResult
+     */
+    public function validate()
+    {
+        if ($this->name == '') {
+            $this->validationError = 'Ungültiger Nutzername';
+            return false;
+        }
+
+        if ($this->password == '') {
+            $this->validationError = 'Ungültiges Password';
+            return false;
+        }
+
+        if (!$this->validateUnusedName()) {
+            $this->validationError = 'Der Nutzername ist bereits vergeben. Bitte wählen Sie einen anderen.';
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * @return   bool
+     */
+    public function validateUnusedName()
+    {
+        $statement = $this->dbConnector->prepare(
+            'SELECT id FROM users WHERE name = :name'
+        );
+        $statement->execute([
+            'name' => $this->name,
+        ]);
+
+        if ($row = $statement->fetch()) {
+            return false;
+        }
+
+        return true;
     }
 }
