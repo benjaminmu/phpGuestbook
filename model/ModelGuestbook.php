@@ -23,7 +23,9 @@ class ModelGuestbook
     {
         $result = [];
 
-        $statement = $this->dbConnector->prepare('SELECT id, headline, text, author FROM entries');
+        $statement = $this->dbConnector->prepare(
+            'SELECT id, headline, text, author FROM entries WHERE validated = 1 AND deleted = 0'
+        );
         $statement->execute(array());
 
         while ($row = $statement->fetch()) {
