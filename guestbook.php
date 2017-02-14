@@ -1,14 +1,12 @@
 <?php
-session_start();
-
 require_once('loader.php');
+session_start();
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
-
+    <link rel="stylesheet" href="css/styles.css">
     <meta charset="UTF-8">
     <title>phpGuestbook</title>
 </head>
@@ -34,14 +32,21 @@ require_once('loader.php');
     endforeach;
     ?>
 
-    <h3>Registrieren:</h3>
-    <form action="register.php" method="post" class="register">
-        <input type="text" name="username"/><label for="username">Nutzername</label><br />
-        <input type="text" name="password"/><label for="password">Paßwort</label><br />
-        <input type="text" name="passwordRepeat"/><label for="password">Paßwort wiederholen</label><br />
-        <input type="submit" value="senden">
-        <input type="hidden" name="operation" value="register">
+    <?php
+    var_dump($_SESSION);
+    ?>
+
+    <?php
+    if (count($_SESSION['user'])):
+    ?>
+    <form action="logout.php" method="post" class="login">
+        <input type="submit" value="abmelden">
+        <input type="hidden" name="operation" value="logout">
     </form>
+
+    <?php
+    else:
+    ?>
 
     <h3>Anmelden:</h3>
     <form action="login.php" method="post" class="login">
@@ -51,27 +56,20 @@ require_once('loader.php');
         <input type="hidden" name="operation" value="login">
     </form>
 
-    <form action="logout.php" method="post" class="login">
-        <input type="submit" value="abmelden">
-        <input type="hidden" name="operation" value="logout">
+    <h3>oder neu Registrieren:</h3>
+    <form action="register.php" method="post" class="register">
+        <input type="text" name="username"/><label for="username">Nutzername</label><br />
+        <input type="text" name="password"/><label for="password">Paßwort</label><br />
+        <input type="text" name="passwordRepeat"/><label for="password">Paßwort wiederholen</label><br />
+        <input type="submit" value="senden">
+        <input type="hidden" name="operation" value="register">
     </form>
 
     <?php
-    if (isset($_POST['action'])) {
-        switch($_POST['action']) {
-            case 'login':
-                $_SESSION['user'] = new ModelGuestUser();
-                $_SESSION['user']->loadByName($_POST['username']);
+    endif;
+    ?>
 
-                if($_SESSION['user']->verify($_POST['password'])) {
-                    // TODO: session login
-                    break;
-                }
-                unset($_SESSION['user']);
-                break;
-        }
-    }
-
+    <?php
 
     ?>
 
