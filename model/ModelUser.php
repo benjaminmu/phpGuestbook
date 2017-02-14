@@ -27,7 +27,7 @@ abstract class ModelUser
      * @param   string $id
      * @return  array
      */
-    public function loadById($name)
+    public function loadById($id)
     {
         $statement = HelperDbConnector::prepare('SELECT * FROM ' . $this->dbTable . ' WHERE id = :id');
         $statement->execute([
