@@ -19,13 +19,32 @@
     padding: 4px;
 }
 
+.form-wrapper {
+    float: left;
+}
+
+.gb-wrapper {
+    float: left;
+}
+
+.clear {
+    clear: both;
+}
+
 .gb-entry {
     border: 1px solid;
     margin: 6px;
     padding: 6px;
+    width: 400px;
 }
 
 .gb-entry h3 {
     margin-top: 6px;
     margin-bottom: 0px;
+}
+
+form label {
+    display: inline-block;
+    width: 140px;
+    margin-right: 10px;
 }
