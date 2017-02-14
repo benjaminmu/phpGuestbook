@@ -8,6 +8,11 @@
 class ModelGuestbook
 {
     private $dbTable = 'entries';
+    private $dbConnector = null;
+
+    public function __construct(DbConnector $dbConnector) {
+        $this->dbConnector = $dbConnector;
+    }
 
     /**
      * retrieves all guestbook entries
@@ -18,7 +23,7 @@ class ModelGuestbook
     {
         $result = [];
 
-        $statement = HelperDbConnector::prepare('SELECT id, headline, text, author FROM ' . $this->dbTable);
+        $statement = $this->dbConnector->prepare('SELECT id, headline, text, author FROM entries');
         $statement->execute(array());
 
         while ($row = $statement->fetch()) {
@@ -40,6 +45,14 @@ class ModelGuestbook
      */
     public function saveEntry(ModelGuestbookEntry $entry)
     {
-        $entry->save($this->dbTable);
+        $statement = $this->dbConnector->prepare('INSERT INTO entries 
+          (headline, text, author) VALUES 
+          (:headline, :text, :author)');
+
+        $statement->execute([
+            'headline' => $entry->getHeadline(),
+            'text' => $entry->getText(),
+            'author' => $entry->getAuthor(),
+        ]);
     }
 }
