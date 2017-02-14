@@ -5,13 +5,16 @@
  *
  * @author Benjamin Munsch <benjamin.munsch@googlemail.com>
  */
-abstract class ModelUser
+class ModelUser
 {
-    protected $dbTable = 'users';
+    protected $dbConnector;
     protected $id;
     protected $name;
     protected $passwordHash;
 
+    public function __construct(DbConnector $dbConnector) {
+        $this->dbConnector = $dbConnector;
+    }
 
     /**
      * @return  int $id
@@ -24,12 +27,12 @@ abstract class ModelUser
     /**
      * populates $this with user data
      *
-     * @param   string $id
+     * @param   int $id
      * @return  array
      */
     public function loadById($id)
     {
-        $statement = HelperDbConnector::prepare('SELECT * FROM ' . $this->dbTable . ' WHERE id = :id');
+        $statement = $this->dbConnector->prepare('SELECT * FROM users WHERE id = :id');
         $statement->execute([
             'id' => (int)$id,
         ]);
@@ -51,7 +54,7 @@ abstract class ModelUser
      */
     public function loadByName($name)
     {
-        $statement = HelperDbConnector::prepare('SELECT * FROM ' . $this->dbTable . ' WHERE name = :name');
+        $statement = $this->dbConnector->prepare('SELECT * FROM users WHERE name = :name');
         $statement->execute([
             'name' => $name,
         ]);
@@ -74,7 +77,7 @@ abstract class ModelUser
     {
         $passwordHash = password_hash($password, PASSWORD_BCRYPT);
 
-        $statement = HelperDbConnector::prepare('INSERT INTO users (name, password_hash) VALUES (:name, :password_hash)');
+        $statement = $this->dbConnector->prepare('INSERT INTO users (name, password_hash) VALUES (:name, :password_hash)');
         $statement->execute([
             'name' => $name,
             'password_hash' => $passwordHash,
