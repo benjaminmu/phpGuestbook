@@ -73,7 +73,7 @@ class ModelGuestbookEntry
      */
     public function getText()
     {
-        return strip_tags((string)$this->text);
+        return nl2br(strip_tags((string)$this->text));
     }
 
     /**
@@ -82,5 +82,19 @@ class ModelGuestbookEntry
     public function getAuthor()
     {
         return strip_tags((string)$this->author);
+    }
+
+    /**
+     * @param   string $dbTable
+     */
+    public function save($dbTable)
+    {
+        $statement = HelperDbConnector::prepare('INSERT INTO ' . $dbTable .
+            ' (headline, text, author) VALUES (:headline, :text, :author)');
+        $statement->execute([
+            'headline' => $this->headline,
+            'text' => $this->text,
+            'author' => $this->author,
+        ]);
     }
 }

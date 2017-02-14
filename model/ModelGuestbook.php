@@ -33,4 +33,13 @@ class ModelGuestbook
 
         return $result;
     }
+
+    /**
+     * @param   ModelGuestbookEntry $entry
+     * @return  void
+     */
+    public function saveEntry(ModelGuestbookEntry $entry)
+    {
+        $entry->save($this->dbTable);
+    }
 }
