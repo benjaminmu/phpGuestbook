@@ -65,7 +65,7 @@ class ModelGuestbookEntry
     /**
      * @return  int $headline
      */
-    public function getheadline()
+    public function getHeadline()
     {
         return strip_tags((string)$this->headline);
     }
