@@ -95,20 +95,6 @@ class ModelGuestbookEntry
     }
 
     /**
-     * @param   string $dbTable
-     */
-    public function save($dbTable)
-    {
-        $statement = HelperDbConnector::prepare('INSERT INTO ' . $dbTable .
-            ' (headline, text, author) VALUES (:headline, :text, :author)');
-        $statement->execute([
-            'headline' => $this->headline,
-            'text' => $this->text,
-            'author' => $this->author,
-        ]);
-    }
-
-    /**
      * @return   array $validationResult
      */
     public function validate()
