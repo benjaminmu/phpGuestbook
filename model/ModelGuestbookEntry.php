@@ -57,7 +57,7 @@ class ModelGuestbookEntry
      */
     public function getId()
     {
-        return $this->id;
+        return (int)$this->id;
     }
 
     /**
@@ -65,7 +65,7 @@ class ModelGuestbookEntry
      */
     public function getheadline()
     {
-        return $this->headline;
+        return strip_tags((string)$this->headline);
     }
 
     /**
@@ -73,7 +73,7 @@ class ModelGuestbookEntry
      */
     public function getText()
     {
-        return $this->text;
+        return strip_tags((string)$this->text);
     }
 
     /**
@@ -81,6 +81,6 @@ class ModelGuestbookEntry
      */
     public function getAuthor()
     {
-        return $this->author;
+        return strip_tags((string)$this->author);
     }
 }

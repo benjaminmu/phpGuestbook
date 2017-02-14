@@ -5,7 +5,7 @@
  *
  * @author Benjamin Munsch <benjamin.munsch@googlemail.com>
  */
-class ModelGuestbook extends ModelDbEntity
+class ModelGuestbook
 {
     private $dbTable = 'entries';
 
@@ -18,7 +18,7 @@ class ModelGuestbook extends ModelDbEntity
     {
         $result = [];
 
-        $statement = $this->dbConnector->prepare('SELECT * FROM ' . $this->dbTable);
+        $statement = HelperDbConnector::prepare('SELECT * FROM ' . $this->dbTable);
         $statement->execute(array());
 
         while ($row = $statement->fetch()) {
