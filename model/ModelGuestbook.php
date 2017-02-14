@@ -18,7 +18,7 @@ class ModelGuestbook
     {
         $result = [];
 
-        $statement = HelperDbConnector::prepare('SELECT * FROM ' . $this->dbTable);
+        $statement = HelperDbConnector::prepare('SELECT id, headline, text, author FROM ' . $this->dbTable);
         $statement->execute(array());
 
         while ($row = $statement->fetch()) {
