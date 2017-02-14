@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Erstellungszeit: 12. Feb 2017 um 22:18
+-- Erstellungszeit: 15. Feb 2017 um 00:17
 -- Server-Version: 5.7.17-0ubuntu0.16.04.1
 -- PHP-Version: 7.0.13-0ubuntu0.16.04.1
 
@@ -30,15 +30,10 @@ CREATE TABLE `entries` (
   `id` int(10) UNSIGNED NOT NULL,
   `headline` text COLLATE utf8_bin NOT NULL,
   `text` text COLLATE utf8_bin NOT NULL,
-  `author` int(10) UNSIGNED NOT NULL
+  `author` int(10) UNSIGNED NOT NULL,
+  `validated` tinyint(1) NOT NULL DEFAULT '0',
+  `deleted` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-
---
--- Daten für Tabelle `entries`
---
-
-INSERT INTO `entries` (`id`, `headline`, `text`, `author`) VALUES
-(1, 'Überschrift', 'Bitte gehen sie weiter. Hier gibt es nichts zu sehen!', 1);
 
 -- --------------------------------------------------------
 
@@ -49,15 +44,9 @@ INSERT INTO `entries` (`id`, `headline`, `text`, `author`) VALUES
 CREATE TABLE `users` (
   `id` int(10) UNSIGNED NOT NULL,
   `name` varchar(80) COLLATE utf8_bin NOT NULL,
-  `token` text COLLATE utf8_bin
+  `password_hash` varchar(60) COLLATE utf8_bin NOT NULL,
+  `admin` tinyint(1) DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-
---
--- Daten für Tabelle `users`
---
-
-INSERT INTO `users` (`id`, `name`, `token`) VALUES
-(1, 'colamann', NULL);
 
 --
 -- Indizes der exportierten Tabellen
@@ -84,12 +73,12 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT für Tabelle `entries`
 --
 ALTER TABLE `entries`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 --
 -- AUTO_INCREMENT für Tabelle `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
