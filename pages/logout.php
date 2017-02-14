@@ -1,6 +1,5 @@
 <?php
-require_once('loader.php');
-session_start();
+require_once('../bootstrap.php');
 
 $_SESSION = [];
 
