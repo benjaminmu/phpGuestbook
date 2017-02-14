@@ -10,21 +10,11 @@
 class HelperDbConnector
 {
     private $pdo = null;
-    private $dbUser = '';
-    private $dbPasswd = '';
-    private $dbName = '';
-    private $dbHost = '';
 
-    public function __construct()
-    {
-        $this->dbUser = 'php_guestbook';
-        $this->dbPasswd = 'php_guestbook';
-        $this->dbName = 'php_guestbook';
-        $this->dbHost = 'localhost';
-
-        $dbConn = 'mysql:host=' . $this->dbHost . ';dbname=' . $this->dbName . ';charset=utf8';
-        $this->pdo = new PDO($dbConn, $this->dbUser, $this->dbPasswd);
-    }
+    const DB_USER = 'php_guestbook';
+    const DB_PASSWD = 'php_guestbook';
+    const DB_NAME = 'php_guestbook';
+    const DB_HOST = 'localhost';
 
     /**
      * prepares sql statement
@@ -34,8 +24,11 @@ class HelperDbConnector
      *
      * @return PDOStatement
      */
-    public function prepare($statement, $driverOptions = array())
+    public static function prepare($statement, $driverOptions = [])
     {
-        return $this->pdo->prepare($statement, $driverOptions);
+        $dbConn = 'mysql:host=' . self::DB_HOST . ';dbname=' . self::DB_NAME . ';charset=utf8';
+        $pdo = new PDO($dbConn, self::DB_USER, self::DB_PASSWD);
+
+        return $pdo->prepare($statement, $driverOptions);
     }
 }
