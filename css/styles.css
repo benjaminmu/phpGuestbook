@@ -1,0 +1,31 @@
+.notice {
+    border: 1px solid;
+    margin-left: 10%;
+    width: 80%;
+}
+
+.notice h3 {
+    background: #32c048;
+    margin: 0;
+    padding: 4px;
+}
+
+.notice.error h3 {
+    background: #c0342d;
+}
+
+.notice p {
+    margin: 0;
+    padding: 4px;
+}
+
+.gb-entry {
+    border: 1px solid;
+    margin: 6px;
+    padding: 6px;
+}
+
+.gb-entry h3 {
+    margin-top: 6px;
+    margin-bottom: 0px;
+}
