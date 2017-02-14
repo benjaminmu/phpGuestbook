@@ -12,6 +12,15 @@ abstract class ModelUser
     protected $name;
     protected $passwordHash;
 
+
+    /**
+     * @return  int $id
+     */
+    public function getId()
+    {
+        return (int)$this->id;
+    }
+
     /**
      * populates $this with user data
      *
