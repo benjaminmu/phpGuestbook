@@ -23,7 +23,7 @@ if ($user->validate()) {
     $user->loadByName($_POST['username']);
     $_SESSION['user'] = $user->getId();
     $_SESSION['notice'] = [
-        'message' => 'Sie sind jetzt angemeldet als '. strip_tags(htmlentities($_POST['username'])),
+        'message' => 'Sie sind jetzt angemeldet als ' . strip_tags(htmlentities($_POST['username'])),
     ];
 
     header('Location: guestbook.php');

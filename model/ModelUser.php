@@ -15,7 +15,8 @@ class ModelUser
     private $admin;
     private $validationError;
 
-    public function __construct(DbConnector $dbConnector) {
+    public function __construct(DbConnector $dbConnector)
+    {
         $this->dbConnector = $dbConnector;
     }
 

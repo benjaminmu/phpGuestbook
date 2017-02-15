@@ -10,7 +10,8 @@ class ModelGuestbook
     private $dbTable = 'entries';
     private $dbConnector = null;
 
-    public function __construct(DbConnector $dbConnector) {
+    public function __construct(DbConnector $dbConnector)
+    {
         $this->dbConnector = $dbConnector;
     }
 
@@ -89,7 +90,7 @@ class ModelGuestbook
     }
 
     /**
-     * @param   int  $id
+     * @param   int $id
      * @return  void
      */
     public function validateEntry($id)
@@ -103,7 +104,7 @@ class ModelGuestbook
     }
 
     /**
-     * @param   int  $id
+     * @param   int $id
      * @return  void
      */
     public function deleteEntry($id)

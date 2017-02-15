@@ -20,7 +20,7 @@ class DbConnector
      * prepares sql statement
      *
      * @param  string $tariffList
-     * @param  array  $driverOptions
+     * @param  array $driverOptions
      *
      * @return PDOStatement
      */
