@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Erstellungszeit: 15. Feb 2017 um 00:17
+-- Erstellungszeit: 15. Feb 2017 um 01:29
 -- Server-Version: 5.7.17-0ubuntu0.16.04.1
 -- PHP-Version: 7.0.13-0ubuntu0.16.04.1
 
@@ -49,6 +49,15 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
+-- Daten für Tabelle `users`
+--
+
+INSERT INTO `users` (`id`, `name`, `password_hash`, `admin`) VALUES
+(8, 'admin', '$2y$10$Ih0W9VmJQEQs/6bPz.956ucm7cKryL2aOPNv.VxXIF8Ai8kSQRSdS', 1),
+(9, 'guest1', '$2y$10$r5HMYMhNb9jFLMZPZswfI.ydv9U7Ey7x3Sr59z19waHOxIqfVUdge', 0),
+(10, 'guest2', '$2y$10$0ztmXsw8cjuZdDm0VP/73emq0VNqqVyQNnNlL3S9cFqt9Tq.Y70re', 0);
+
+--
 -- Indizes der exportierten Tabellen
 --
 
@@ -73,12 +82,12 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT für Tabelle `entries`
 --
 ALTER TABLE `entries`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT für Tabelle `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
