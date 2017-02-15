@@ -74,7 +74,7 @@ endif;
 ?>
 
 <div class="gb-wrapper">
-
+    <h2>Was andere Besucher sagten:</h2>
     <?php
     $guestbook = new ModelGuestbook($dbConnector);
     $entries = $guestbook->getValidatedEntries();
@@ -108,7 +108,7 @@ endif;
 if ($user->isAdmin()):
     ?>
     <div class="gb-wrapper admin">
-
+        <h2>Neue, noch unvalidierte Einträge:</h2>
         <?php
         $guestbook = new ModelGuestbook($dbConnector);
         $entries = $guestbook->getUnvalidatedEntries();

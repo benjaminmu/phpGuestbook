@@ -25,10 +25,16 @@
 
 .gb-wrapper {
     float: left;
+    margin-right: 10px;
+    margin-bottom: 20px;
 }
 
 .gb-wrapper.admin form {
     display: inline-block;
+}
+
+.gb-wrapper h2 {
+    width: 400px;
 }
 
 .clear {
@@ -37,7 +43,7 @@
 
 .gb-entry {
     border: 1px solid;
-    margin: 6px;
+    margin: 6px 0;
     padding: 6px;
     width: 400px;
 }
