@@ -15,11 +15,11 @@ class ModelGuestbook
     }
 
     /**
-     * retrieves all guestbook entries
+     * retrieves all validated guestbook entries
      *
      * @return  array
      */
-    public function getEntries()
+    public function getValidatedEntries()
     {
         $result = [];
 
@@ -29,16 +29,46 @@ class ModelGuestbook
         $statement->execute(array());
 
         while ($row = $statement->fetch()) {
-            $entry = new ModelGuestbookEntry();
-            $entry->setId($row['id'])
-                ->setHeadline($row['headline'])
-                ->setText($row['text'])
-                ->setAuthor($row['author']);
-
-            $result[] = $entry;
+            $result[] = $this->createModelGuestbookEntryFromArray($row);
         }
 
         return $result;
+    }
+
+    /**
+     * retrieves all guestbook entries
+     *
+     * @return  array
+     */
+    public function getUnvalidatedEntries()
+    {
+        $result = [];
+
+        $statement = $this->dbConnector->prepare(
+            'SELECT id, headline, text, author FROM entries WHERE validated = 0 AND deleted = 0'
+        );
+        $statement->execute(array());
+
+        while ($row = $statement->fetch()) {
+            $result[] = $this->createModelGuestbookEntryFromArray($row);
+        }
+
+        return $result;
+    }
+
+    /**
+     * @param   array $databaseRow
+     * @return  array
+     */
+    public function createModelGuestbookEntryFromArray($databaseRow)
+    {
+        $entry = new ModelGuestbookEntry();
+        $entry->setId($databaseRow['id'])
+            ->setHeadline($databaseRow['headline'])
+            ->setText($databaseRow['text'])
+            ->setAuthor($databaseRow['author']);
+
+        return $entry;
     }
 
     /**
@@ -55,6 +85,34 @@ class ModelGuestbook
             'headline' => $entry->getHeadline(),
             'text' => $entry->getText(),
             'author' => $entry->getAuthor(),
+        ]);
+    }
+
+    /**
+     * @param   int  $id
+     * @return  void
+     */
+    public function validateEntry($id)
+    {
+        $statement = $this->dbConnector->prepare(
+            'UPDATE entries SET validated=1 WHERE id = :id');
+
+        $statement->execute([
+            'id' => $id,
+        ]);
+    }
+
+    /**
+     * @param   int  $id
+     * @return  void
+     */
+    public function deleteEntry($id)
+    {
+        $statement = $this->dbConnector->prepare(
+            'UPDATE entries SET deleted=1 WHERE id = :id');
+
+        $statement->execute([
+            'id' => $id,
         ]);
     }
 }
