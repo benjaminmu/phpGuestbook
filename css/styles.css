@@ -27,6 +27,10 @@
     float: left;
 }
 
+.gb-wrapper.admin form {
+    display: inline-block;
+}
+
 .clear {
     clear: both;
 }
