@@ -67,15 +67,6 @@ require_once('../bootstrap.php');
             <input type="hidden" name="action" value="login">
         </form>
 
-        <h3>oder neu Registrieren:</h3>
-        <form action="register.php" method="post" class="register">
-            <label for="username">Nutzername</label><input type="text" name="username"/><br />
-            <label for="password">Paßwort</label><input type="text" name="password"/><br />
-            <label for="passwordRepeat">Paßwort wiederholen</label><input type="text" name="passwordRepeat"/><br />
-            <input type="submit" value="senden">
-            <input type="hidden" name="action" value="register">
-        </form>
-
         <?php endif; ?>
     </div>
     <?php
