@@ -2,11 +2,6 @@
 require_once('../bootstrap.php');
 ?>
 
-<?php
-//var_dump($_SESSION);
-//var_dump($user);
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -54,7 +49,7 @@ require_once('../bootstrap.php');
         <form action="saveEntry.php" method="post" class="save-entry">
             <label for="headline">Überschrift</label><br />
             <input type="text" name="headline"/><br />
-            <label for="text">was du uns sagen möchtest:</label><br />
+            <label for="text">Was Sie uns sagen möchten:</label><br />
             <textarea name="text" cols="30" rows="10"></textarea><br />
             <input type="submit" value="senden">
             <input type="hidden" name="action" value="register">
