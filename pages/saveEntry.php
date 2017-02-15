@@ -18,8 +18,8 @@ if ($entry->validate()) {
     $guestbook->saveEntry($entry);
     $_SESSION['notice'] = [
         'message' => 'Vielen Dank für Ihren Eintrag. Er wird angezeigt, 
-        sobald er von einem Administrator freigegeben wurde.'],
-    );
+        sobald er von einem Administrator freigegeben wurde.'
+    ];
     header('Location: guestbook.php');
     exit(0);
 }
