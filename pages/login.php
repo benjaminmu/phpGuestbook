@@ -3,7 +3,7 @@ require_once('../bootstrap.php');
 
 $user = new ModelUser($dbConnector);
 
-if (isset(($_POST['username']))) {
+if (isset($_POST['username'])) {
     $user->loadByName($_POST['username']);
     $_SESSION['user'] = $user->getId();
 }
