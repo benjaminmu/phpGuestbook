@@ -37,7 +37,7 @@ endif;
 
 <div class="form-wrapper">
     <?php
-    if (isset($user) && $user):
+    if ($user->isLoggedIn()):
         ?>
 
         <form action="logout.php" method="post" class="logout">
@@ -67,6 +67,15 @@ endif;
             <input type="hidden" name="action" value="login">
         </form>
 
+        <h3>oder neu Registrieren:</h3>
+        <form action="register.php" method="post" class="register">
+            <label for="username">Nutzername</label><input type="text" name="username"/><br />
+            <label for="password">Paßwort</label><input type="text" name="password"/><br />
+            <label for="password">Paßwort wiederholen</label><input type="text" name="passwordRepeat"/><br />
+            <input type="submit" value="senden">
+            <input type="hidden" name="operation" value="register">
+        </form>
+
     <?php endif; ?>
 </div>
 <?php
@@ -89,7 +98,7 @@ endif;
             <p class="gb-entry-text">
                 <?php echo $entry->getText(); ?>
             </p>
-            <p class="author">Autor: <?php echo $user->getName() ?></p>
+            <p class="author">Autor: <?php echo $author->getName() ?></p>
             <?php if ($user->isAdmin()): ?>
                 <form action="administrate.php" method="post">
                     <input type="hidden" name="id" value="<?php echo $entry->getId(); ?>">
