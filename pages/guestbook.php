@@ -48,9 +48,9 @@ endif;
         <h3>Eintrag schreiben:</h3>
         <form action="saveEntry.php" method="post" class="save-entry">
             <label for="headline">Überschrift</label><br/>
-            <input type="text" name="headline"/><br/>
+            <input type="text" id="headline" name="headline"/><br/>
             <label for="text">Was Sie uns sagen möchten:</label><br/>
-            <textarea name="text" cols="30" rows="10"></textarea><br/>
+            <textarea name="text" id="text" cols="30" rows="10"></textarea><br/>
             <input type="submit" value="senden">
             <input type="hidden" name="action" value="register">
         </form>
@@ -61,17 +61,17 @@ endif;
 
         <h3>Anmelden:</h3>
         <form action="login.php" method="post" class="login">
-            <label for="username">Nutzername</label><input type="text" name="username"/><br/>
-            <label for="password">Paßwort</label><input type="text" name="password"/><br/>
+            <label for="username">Nutzername</label><input type="text" id="username" name="username"/><br/>
+            <label for="password">Paßwort</label><input type="text" id="password" name="password"/><br/>
             <input type="submit" value="senden">
             <input type="hidden" name="action" value="login">
         </form>
 
         <h3>oder neu Registrieren:</h3>
         <form action="register.php" method="post" class="register">
-            <label for="username">Nutzername</label><input type="text" name="username"/><br />
-            <label for="password">Paßwort</label><input type="text" name="password"/><br />
-            <label for="password">Paßwort wiederholen</label><input type="text" name="passwordRepeat"/><br />
+            <label for="username">Nutzername</label><input type="text" id="username" name="username"/><br />
+            <label for="password">Paßwort</label><input type="text" id="password" name="password"/><br />
+            <label for="passwordRepeat">Paßwort wiederholen</label><input type="text" id="passwordRepeat" name="passwordRepeat"/><br />
             <input type="submit" value="senden">
             <input type="hidden" name="operation" value="register">
         </form>
