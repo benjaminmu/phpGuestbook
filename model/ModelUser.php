@@ -65,6 +65,14 @@ class ModelUser
     }
 
     /**
+     * @return  bool
+     */
+    public function isLoggedIn()
+    {
+        return !is_null($this->id);
+    }
+
+    /**
      * @return  string $validationError
      */
     public function getValidationError()
