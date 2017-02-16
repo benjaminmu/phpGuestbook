@@ -13,7 +13,4 @@ $user = new ModelUser($dbConnector);
 
 if (isset($_SESSION['user'])) {
     $user->loadById($_SESSION['user']);
-} else {
-    unset($user);
 }
-
